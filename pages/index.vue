@@ -3,7 +3,7 @@
     <div>
       <Logo />
       <h1 class="title">
-        DAEFrontEndProject123
+        DAEFrontEndProject123123
       </h1>
       <div class="links">
         <a
