@@ -8,7 +8,7 @@
             </template>
         </b-table>
         <b-button variant="warning" to="/"> Back</b-button>
-        <b-button variant="primary" to="projetistas/create">Novo Projetista</b-button>
+        
     </b-container>
 </template>
 
