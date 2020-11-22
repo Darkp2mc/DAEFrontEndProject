@@ -25,8 +25,6 @@ export default {
           "Produto",
           "Projeto",
           "Dimensoes"
-
-
       ]
     }
   },

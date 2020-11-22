@@ -4,33 +4,34 @@
     <form @submit.prevent="create" :disabled="!isFormValid">
       <b-input
         v-model.trim="nome"
-        :state="isnomeValid"
+        :state="isNomeValid"
         required
         placeholder="Enter the project name"
       />
       <b-input
-        v-model.trim="cliente"
+        v-model.trim="clienteUsername"
         :state="isClienteValid"
         required
-        placeholder="Enter the Client Name"
+        placeholder="Enter the Client UserName"
       />
       <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-      <nuxt-link :to="`/projetistas/${username}`">Return</nuxt-link>
+
+      <nuxt-link :to="`/projetistas/${projetistaUsername}`">Return</nuxt-link>
+
       <button type="reset" @click="reset">RESET</button>
+
       <button @click.prevent="create" :disabled="!isFormValid">CREATE</button>
     </form>
   </div>
 </template>
 <script>
 export default {
-   props: [
-    'username'
-  ],
+   
     data() {
     return {
-      projetistaUsername: this.username,
       nome: null,
       clienteUsername: null,
+      projetistaUsername: this.$auth.user.sub,
       errorMsg: false,
     };
   },
@@ -38,7 +39,7 @@ export default {
     
     isNomeValid() {
       if (!this.nome) {
-        return null;
+        return null
       }
       let nomeLen = this.nome.length;
       if (nomeLen < 3 || nomeLen > 25) {
@@ -48,11 +49,11 @@ export default {
     },
 
     isClienteValid(){
-      if(!this.cliente){
+      if(!this.clienteUsername){
         return null
       }
 
-      let clienteLen = this.cliente.length
+      let clienteLen = this.clienteUsername.length
       if(clienteLen <3 || clienteLen> 25){
         return false
       }
@@ -62,13 +63,12 @@ export default {
    
     isFormValid() {
       
-      if (!this.isNameValid) {
+      if (!this.isNomeValid) {
         return false;
       }
       if (!this.isCliente) {
         return false;
       }
-      
       return true;
     },
   },
@@ -80,12 +80,12 @@ export default {
       this.$axios
         .$post("/api/projetos", {
           nome: this.nome,
-          clienteUsername: this.cliente,
-          projetistaUsername: this.username
-          
+          clienteUsername: this.clienteUsername,
+          projetistaUsername: this.projetistaUsername
         })
         .then(() => {
-          this.$router.push("/projetistas/"+this.username);
+          this.$router.push("/projetistas/"+this.projetistaUsername);
+          
         })
         .catch((error) => {
           this.errorMsg = error.response.data;
