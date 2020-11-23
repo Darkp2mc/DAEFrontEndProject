@@ -66,7 +66,7 @@ export default {
       if (!this.isNomeValid) {
         return false;
       }
-      if (!this.isCliente) {
+      if (!this.isClienteValid) {
         return false;
       }
       return true;
