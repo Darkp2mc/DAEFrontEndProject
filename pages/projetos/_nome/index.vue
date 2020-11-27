@@ -12,7 +12,7 @@
         <p v-else> Sem Estruturas</p>
         <b-button variant="warning" :to="`/projetistas/${projeto.projetistaUsername}`">Back</b-button>
         
-        <nuxt-link :to="`/projetos/${projeto.nome}/send-email`">Send e-mail</nuxt-link>
+        <nuxt-link class="btn btn-success" :to="`/projetos/${projeto.nome}/send-email`">Send e-mail</nuxt-link>
 
     </b-container>
 </template>
