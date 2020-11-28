@@ -10,13 +10,13 @@
           <nuxt-link class="btn btn-primary" :to="`/projetos/${row.item.nome}`">
                 Details
           </nuxt-link>
-          <b-button variant="danger" v-on:click="deleteProjeto(row.item.nome)">DELETE</b-button>  
+          <b-button variant="danger" v-on:click="deleteProjeto(row.item.nome)">DELETE</b-button>
       </template>
     </b-table>
     <p v-else>Sem Projetos</p>
-    
+
     <nuxt-link class="btn btn-success"  :to="`/projetos/create`">Create New Project</nuxt-link>
-    
+   
   </b-container>
   
 </template>
@@ -31,6 +31,7 @@ export default {
         "clienteUsername",
         "Actions"
       ]
+      
     };
   },
   computed: {

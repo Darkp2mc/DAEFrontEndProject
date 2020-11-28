@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Send an E-mail to Cliente {{  }}</h1>
+    <h1>Send an E-mail to Cliente {{projeto.clienteUsername}}</h1>
     <form @submit.prevent="send">
       <div>
         subject:
