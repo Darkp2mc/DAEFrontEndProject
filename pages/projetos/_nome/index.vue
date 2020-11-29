@@ -13,7 +13,7 @@
 
         <h4>Documents</h4>
         <b-table v-if="documents.length" striped over :items="documents" :fields="documentsFields">
-        <template v slot:cell(actions)="row">
+        <template v-slot:cell(actions)="row">
             <b-btn class="btn btn-link" @click.prevent="download(row.item)"
             target="_blank">Download</b-btn>
         </template>
@@ -55,8 +55,11 @@ export default {
   },
 
   created() {
-      this.$axios 
-        .$get(`/api/projetos/${this.nome}`)
+      this.$axios
+        .$get(`/api/projetistas/${this.$auth.user.sub}/projetos/${this.nome}`)
+        .catch(
+          this.$axios.$get(`/api/clientes/${this.$auth.user.sub}/projetos/${this.nome}`).then((projeto)=> (this.projeto = projeto || {}))
+        )
         .then((projeto)=> (this.projeto = projeto || {}))
   },
 

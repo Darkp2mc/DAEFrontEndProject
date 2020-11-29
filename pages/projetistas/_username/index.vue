@@ -16,9 +16,9 @@
     <p v-else>Sem Projetos</p>
 
     <nuxt-link class="btn btn-success"  :to="`/projetos/create`">Create New Project</nuxt-link>
-   
+
   </b-container>
-  
+
 </template>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.18/vue.min.js"></script>
 <script>
@@ -31,7 +31,7 @@ export default {
         "clienteUsername",
         "Actions"
       ]
-      
+
     };
   },
   computed: {
@@ -47,8 +47,8 @@ export default {
     this.$axios
       .$get(`/api/projetistas/${this.username}`)
       .then((projetista) => (this.projetista = projetista || {}))
-      
-     
+
+
   },
   methods:{
     deleteProjeto(projetoNome){
@@ -57,7 +57,7 @@ export default {
       .then(()=> {
         window.location.reload()
       })
-      .catch(errors=> 
+      .catch(errors=>
         console.log(errors)
       )
     }
