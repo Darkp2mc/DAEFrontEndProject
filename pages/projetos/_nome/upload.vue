@@ -8,7 +8,7 @@
       drop-placeholder="Drop file here..."
     ></b-form-file>
     <div class="mt 3">Selected file: {{ file ? file.name : "" }}</div>
-    <nuxt-link class="btn btn-link" :to="`/projetistas/${this.username}`"
+    <nuxt-link class="btn btn-link" :to="`/clientes/${this.username}`"
       >Back</nuxt-link
     >
     <b-button type="submit" :disabled="!hasFile">Upload</b-button>
@@ -20,8 +20,8 @@ export default {
   data() {
     return {
       username: this.$auth.user.sub,
-      
-      file: null,
+      file: null
+     
     };
   },
   computed: {
@@ -30,7 +30,7 @@ export default {
     },
     formData() {
       let formData = new FormData();
-      formData.append("nome", this.projeto.nome);
+      formData.append("nome", this.$route.params.nome);
       if (this.file) {
         formData.append("file", this.file);
       }

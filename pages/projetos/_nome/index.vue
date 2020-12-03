@@ -4,7 +4,7 @@
         <p>Nome: {{projeto.nome}}</p>
         <p>Projetista: {{projeto.projetistaUsername}}</p>
         <p>Cliente: {{projeto.clienteUsername}}</p>
-        <p>Comentarios: {{projeto.comentarios}}</p>
+        <p>Comentarios: {{projeto.comentario}}</p>
 
         <h4>Estruturas</h4>
         <b-table v-if="estruturas.length" striped over :items="estruturas" :fields="estruturasFields">
@@ -20,10 +20,13 @@
         </b-table>
         <p v-else>No documents.</p>
 
-        <b-button variant="warning" :to="`/projetistas/${projeto.projetistaUsername}`">Back</b-button>
-        <nuxt-link class="btn btn-success" :to="`/projetos/${projeto.nome}/send-email`">Send e-mail</nuxt-link>
+        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetistas/${projeto.projetistaUsername}`">Back</b-button>
+        <nuxt-link class="btn btn-success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/send-email`">Send e-mail</nuxt-link>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/update`">Update Projeto</nuxt-link>
-
+        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Back</b-button>
+        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Upload Ficheiro</nuxt-link>
+        <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>
+         
     </b-container>
 </template>
 
@@ -45,6 +48,7 @@ export default {
   computed: {
       nome() {
           return this.$route.params.nome
+         
       },
       estruturas() {
           return this.projeto.estruturas || []
@@ -55,12 +59,15 @@ export default {
   },
 
   created() {
-      this.$axios
-        .$get(`/api/projetistas/${this.$auth.user.sub}/projetos/${this.nome}`)
-        .catch(
-          this.$axios.$get(`/api/clientes/${this.$auth.user.sub}/projetos/${this.nome}`).then((projeto)=> (this.projeto = projeto || {}))
-        )
-        .then((projeto)=> (this.projeto = projeto || {}))
+        if(this.$auth.user.groups.includes("Projetista")){
+           this.$axios
+                .$get(`/api/projetistas/${this.$auth.user.sub}/projetos/${this.nome}`)
+                    .then((projeto)=> (this.projeto = projeto || {}))
+        }else{
+             this.$axios.$get(`/api/clientes/${this.$auth.user.sub}/projetos/${this.nome}`)
+            .then((projeto)=> (this.projeto = projeto || {}))
+        }
+            
   },
 
   methods: {
