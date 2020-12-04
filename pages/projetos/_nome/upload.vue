@@ -8,7 +8,7 @@
       drop-placeholder="Drop file here..."
     ></b-form-file>
     <div class="mt 3">Selected file: {{ file ? file.name : "" }}</div>
-    <nuxt-link class="btn btn-link" :to="`/clientes/${this.username}`"
+    <nuxt-link class="btn btn-link" :to="`/projetos/${$route.params.nome}`"
       >Back</nuxt-link
     >
     <b-button type="submit" :disabled="!hasFile">Upload</b-button>
@@ -49,6 +49,7 @@ export default {
       });
       promisse.then(() => {
         this.$toast.success("File uploaded!").goAway(3000);
+        this.$router.push("/projetos/"+ this.$route.params.nome)
       });
       promisse.catch(() => {
         this.$toast.error("Sorry, could no upload file!").goAway(3000);
