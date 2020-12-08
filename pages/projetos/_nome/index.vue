@@ -2,29 +2,36 @@
     <b-container>
         <h4>Detalhes do Projeto</h4>
         <p>Nome: {{projeto.nome}}</p>
-        <p>Projetista: {{projeto.projetistaUsername}}</p>
-        <p>Cliente: {{projeto.clienteUsername}}</p>
+        <p v-if="this.$auth.user.groups.includes('Cliente')">Projetista: {{projeto.projetistaUsername}}</p>
+        <p v-if="this.$auth.user.groups.includes('Projetista')">Cliente: {{projeto.clienteUsername}}</p>
         <p>Comentarios: {{projeto.comentario}}</p>
 
         <h4>Estruturas</h4>
         <b-table v-if="estruturas.length" striped over :items="estruturas" :fields="estruturasFields">
+            <template v-slot:cell(actions)="row">
+                <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
+                
+            </template>
         </b-table>
         <p v-else> Sem Estruturas</p>
 
-        <h4>Documents</h4>
+        
+
+        <h4>Documentos</h4>
         <b-table v-if="documents.length" striped over :items="documents" :fields="documentsFields">
         <template v-slot:cell(actions)="row">
             <b-btn class="btn btn-link" @click.prevent="download(row.item)"
             target="_blank">Download</b-btn>
         </template>
         </b-table>
-        <p v-else>No documents.</p>
+        <p v-else>Sem Documentos</p>
 
-        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetistas/${projeto.projetistaUsername}`">Back</b-button>
-        <nuxt-link class="btn btn-success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/send-email`">Send e-mail</nuxt-link>
-        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/update`">Update Projeto</nuxt-link>
-        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Back</b-button>
-        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Upload Ficheiro</nuxt-link>
+        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetistas/${projeto.projetistaUsername}`">Voltar</b-button>
+        <nuxt-link class="btn btn-success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/send-email`">Enviar e-mail</nuxt-link>
+        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/update`">Atualizar Projeto</nuxt-link>
+        <nuxt-link class="btn btn-danger" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/estruturas/create`">Criar Estrutura </nuxt-link>
+        <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Voltar</b-button>
+        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Enviar Ficheiro</nuxt-link>
         <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>
          
     </b-container>
@@ -36,11 +43,12 @@ export default {
     return {
       projeto: {},
       estruturasFields : [
-          "Nome",
-          "Produto",
-          "Projeto",
-          "Dimensoes"
+          'nome',
+          'tipoDeProduto',
+          'rejeitada',
+          'actions'
       ],
+      
       documentsFields: ['filename', 'actions']
     }
   },
@@ -83,7 +91,8 @@ export default {
                 document.body.appendChild(link)
                 link.click()
                 })
-      }
+      },
+
   }
 }
 </script>

@@ -16,7 +16,7 @@
       />
       <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
 
-      <nuxt-link :to="`/projetistas/${projetistaUsername}`">Return</nuxt-link>
+      <nuxt-link class="btn btn-primary" :to="`/projetistas/${projetistaUsername}`">Return</nuxt-link>
 
       <button type="reset" @click="reset">RESET</button>
 
