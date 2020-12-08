@@ -15,6 +15,9 @@
         <p v-else> Sem Variantes</p>
 
         <b-button variant="primary" :to="`/projetos/${estrutura.projetoNome}`">Voltar</b-button>
+        <b-button variant="success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`${nome}/variantes/create`">Adicionar Variante</b-button>
+       <b-button variant="success" v-if="this.$auth.user.groups.includes('Cliente')" >Aprovar</b-button>
+       <b-button variant="danger" v-if="this.$auth.user.groups.includes('Cliente')" >Rejeitar</b-button>
     </b-container>
 </template>
 
@@ -27,7 +30,8 @@ export default {
                 'codigo',
                 'produtoNome',
                 'nome'
-            ]
+            ],
+            rejeitada: null
 
         }  
     },
@@ -42,7 +46,9 @@ export default {
     created() {
         this.$axios.$get(`/api/estruturas/${this.nome}`)
             .then((estrutura)=> (this.estrutura = estrutura || {}))
-    }
+    },
+   
+
     
 }
 </script>
