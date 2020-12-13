@@ -86,7 +86,8 @@ export default {
       numeroDeVaos: null,
       comprimentoDaVao: null,
       alturaDaLage: null,
-      sobrecarga: null      
+      sobrecarga: null,
+      estado: null    
     }
   },
   computed: {
@@ -212,7 +213,8 @@ export default {
             comprimentoDaVao: this.comprimentoDaVao,
             aplicacao: this.aplicacao,
             alturaDaLage: this.alturaDaLage,
-            sobrecarga: this.sobrecarga
+            sobrecarga: this.sobrecarga,
+            estado: 0
         })
         .then(()=> {
          this.$router.push("/projetos/"+this.projetoNome);

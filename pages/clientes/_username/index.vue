@@ -34,15 +34,19 @@ export default {
     username() {
       return this.$route.params.username;
     },
+    
     projetos(){
+      
       return this.cliente.projetoDTOs || []
+           
     }
 
   },
   created() {
     this.$axios
       .$get(`/api/clientes/${this.username}`)
-      .then((cliente) => (this.cliente = cliente || {}))
+      .then((cliente) => (this.cliente = cliente || {}))   
+      
   }
   
   

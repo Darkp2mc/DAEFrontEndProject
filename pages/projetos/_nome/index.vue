@@ -10,12 +10,9 @@
         <b-table v-if="estruturas.length" striped over :items="estruturas" :fields="estruturasFields">
             <template v-slot:cell(actions)="row">
                 <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
-                
             </template>
         </b-table>
         <p v-else> Sem Estruturas</p>
-
-        
 
         <h4>Documentos</h4>
         <b-table v-if="documents.length" striped over :items="documents" :fields="documentsFields">
@@ -32,8 +29,7 @@
         <nuxt-link class="btn btn-danger" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/estruturas/create`">Criar Estrutura </nuxt-link>
         <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Voltar</b-button>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Enviar Ficheiro</nuxt-link>
-        <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>
-         
+        <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>  
     </b-container>
 </template>
 
@@ -45,7 +41,7 @@ export default {
       estruturasFields : [
           'nome',
           'tipoDeProduto',
-          'rejeitada',
+          'estado',
           'actions'
       ],
       

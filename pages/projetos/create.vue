@@ -33,6 +33,8 @@ export default {
       clienteUsername: null,
       projetistaUsername: this.$auth.user.sub,
       errorMsg: false,
+      estado: null,
+      visibilidade: null
     };
   },
   computed: {
@@ -81,7 +83,9 @@ export default {
         .$post("/api/projetos", {
           nome: this.nome,
           clienteUsername: this.clienteUsername,
-          projetistaUsername: this.projetistaUsername
+          projetistaUsername: this.projetistaUsername,
+          estado: 0,
+          visibilidade: 0
         })
         .then(() => {
           this.$router.push("/projetistas/"+this.projetistaUsername);

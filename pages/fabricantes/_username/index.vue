@@ -8,6 +8,8 @@
         <b-table v-if="produtos.length" striped over :items="produtos" :fields="produtoFields">
         </b-table>
         <p v-else>Sem Produtos</p>
+
+        <nuxt-link class="btn btn-success"  :to="`/produtos/create`">Criar Produtos</nuxt-link>
     </b-container>
 </template>
 
