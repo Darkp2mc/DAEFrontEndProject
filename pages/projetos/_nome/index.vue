@@ -5,6 +5,10 @@
         <p v-if="this.$auth.user.groups.includes('Cliente')">Projetista: {{projeto.projetistaUsername}}</p>
         <p v-if="this.$auth.user.groups.includes('Projetista')">Cliente: {{projeto.clienteUsername}}</p>
         <p>Comentarios: {{projeto.comentario}}</p>
+        <p v-if="projeto.estado==0">Em Desenvolvimento</p>
+        <p v-if="projeto.estado==2">Terminado</p>
+        <p v-if="projeto.estado==1">Aceite pelo Cliente</p>
+        <p v-if="projeto.estado==-1">Recusado pelo Cliente</p>
 
         <h4>Estruturas</h4>
         <b-table v-if="estruturas.length" striped over :items="estruturas" :fields="estruturasFields">
@@ -27,6 +31,7 @@
         <nuxt-link class="btn btn-success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/send-email`">Enviar e-mail</nuxt-link>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/update`">Atualizar Projeto</nuxt-link>
         <nuxt-link class="btn btn-danger" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/estruturas/create`">Criar Estrutura </nuxt-link>
+        <b-button class="btn btn-info" v-if="this.$auth.user.groups.includes('Projetista') && projeto.estado!=2" v-on:click="terminar()">Terminar Projeto</b-button>
         <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Voltar</b-button>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Enviar Ficheiro</nuxt-link>
         <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>  
@@ -88,6 +93,16 @@ export default {
                 link.click()
                 })
       },
+      terminar(){
+          this.$axios.$put(`api/projetos/${this.nome}/terminar`)
+          .then( () => {
+                   this.$router.push("/projetos/"+this.nome);
+                   
+                })
+                .catch(errors=>
+                    console.log(errors)
+                )
+      }
 
   }
 }
