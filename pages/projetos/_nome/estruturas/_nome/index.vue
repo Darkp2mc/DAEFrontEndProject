@@ -111,7 +111,7 @@ export default {
         },
         removerVariante(variante){
             const varianteCod = variante.codigo
-            this.$axios.$delete(`/api/estruturas/${this.nome}/variantes/`+varianteCod)
+            this.$axios.$put(`/api/estruturas/${this.nome}/variantes/${varianteCod}/remove` )
                 .then(() => {
                  window.location.reload()
                    
