@@ -32,7 +32,7 @@
         required
         placeholder="Insira o N do produto"
       />
-        <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
+      <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
       <button type="reset" @click="reset">Reset</button>
       <button @click.prevent="create" :disabled="!isFormValid">Criar</button>
     </form>
@@ -53,7 +53,7 @@ export default {
       tipoOptions: [
         { value: null, text: "Escolha o tipo de Produto" },
         { value: "Chapa", text: "Chapa" },
-        { value: "Lage", text: "Lage" },
+        { value: "Laje", text: "Laje" },
         { value: "Painel", text: "Painel" },
         { value: "Perfil", text: "Perfil" },
       ],
@@ -156,9 +156,10 @@ export default {
         .post("/api/produtos", {
             nome: this.nome,
             tipo: this.tipo,
+            familia: this.familia,
             e: this.e,
             n: this.N,
-            fabricanteNome: this.fabricanteNome
+            fabricanteUsername: this.fabricanteNome
         })
         .then(() => {
           this.$router.push("/fabricantes/" + this.fabricanteNome);

@@ -10,8 +10,15 @@
         <p>G: {{produto.g}}</p>
         <h4>Variantes</h4>
         <b-table v-if="variantes.length" striped over :items="variantes" :fields="variantesFields">
+            <template v-slot:cell(actions)= "row">
+                <nuxt-link class="btn btn-success" :to="`/variantes/${row.item.nome}/update`">Atualizar</nuxt-link>
+                <b-button variant="danger" v-on:click="deleteVariante(row.item.codigo)">Eliminar</b-button>
+            </template>
         </b-table>
         <p v-else> Sem Variantes</p>
+
+        <nuxt-link class="btn btn-primary" :to="`/fabricantes/${produto.fabricanteUsername}`" >Voltar Atras</nuxt-link>
+        <nuxt-link class="btn btn-success" :to="`/produtos/${produto.nome}/variantes/create`"> Criar Variante</nuxt-link>
        
     </b-container>
 </template>
@@ -43,10 +50,8 @@ export default {
                 'ys_mm',
                 'zc_mm',
                 'lt_mm',
-                'lw_mm'
-
-
-                
+                'lw_mm',
+                'actions'                
             ],
 
         }
@@ -64,6 +69,11 @@ export default {
         this.$axios.$get(`/api/produtos/${this.nome}`)
             .then((produto)=> (this.produto = produto || {}))
 
+    },
+    methods: {
+        deleteVariante(codigoVariante){
+
+        }
     }
     
 }

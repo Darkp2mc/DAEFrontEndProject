@@ -8,8 +8,8 @@
         <b-table v-if="produtos.length" striped over :items="produtos" :fields="produtoFields">
             <template v-slot:cell(actions)= "row">
                 <nuxt-link class="btn btn-primary" :to="`/produtos/${row.item.nome}`">Details</nuxt-link>
-
-                <b-button variant="danger" v-on:click="deleteProduto(row.item.nome)">DELETE</b-button>
+                <nuxt-link class="btn btn-success" :to="`/produtos/${row.item.nome}/update`">Atualizar</nuxt-link>
+                <b-button variant="danger" v-on:click="deleteProduto(row.item.nome)">Eliminar</b-button>
             </template>
         </b-table>
         <p v-else>Sem Produtos</p>
@@ -54,7 +54,8 @@ export default {
             .catch(errors=>
                 console.log(errors)
             )
-        }
+        },
+        
     }
 }
 </script>
