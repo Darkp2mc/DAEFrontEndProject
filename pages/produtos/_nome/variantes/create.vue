@@ -200,10 +200,7 @@ export default {
     },
     isWeff_pValid(){
         if (!this.weff_p) {
-        return null;
-      }
-      if (this.weff_p <= 0) {
-        this.errorMsg = "weff_p tem de ser um valor >0";
+        this.errorMsg = "introduza valor";
         return false;
       }
       this.errorMsg = "";
@@ -212,46 +209,37 @@ export default {
     },
     isWeff_nValid(){
         if (!this.weff_n) {
-        return null;
-      }
-      if (this.weff_n <= 0) {
-        this.errorMsg = "weff_n tem de ser um valor >0";
+        this.errorMsg = "introduza valor";
         return false;
       }
+      
       this.errorMsg = "";
       return true;
 
     },
     isArValid(){
         if (!this.ar) {
-        return null;
-      }
-      if (this.ar <= 0) {
-        this.errorMsg = "ar tem de ser um valor >0";
+       this.errorMsg = "introduza valor";
         return false;
       }
+      
       this.errorMsg = "";
       return true;
 
     },
     isSigmaCValid(){
         if (!this.sigmaC) {
-        return null;
-      }
-      if (this.sigmaC <= 0) {
-        this.errorMsg = "SigmaC tem de ser um valor >0";
+        this.errorMsg = "introduza valor";
         return false;
       }
+      
       this.errorMsg = "";
       return true;
 
     },
     isH_mmValid(){
         if (!this.h_mm) {
-        return null;
-      }
-      if (this.h_mm <= 0) {
-        this.errorMsg = "H_mm tem de ser um valor >0";
+        this.errorMsg = "introduza valor";
         return false;
       }
       this.errorMsg = "";
@@ -259,169 +247,139 @@ export default {
     },
     isB_mmValid(){
         if(!this.b_mm){
-            return null
-        }
-        if (this.b_mm <= 0) {
-        this.errorMsg = "B_mm tem de ser um valor >0";
+            this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true;
     },
     isC_mmValid(){
         if(!this.c_mm){
-            return null
-        }
-        if (this.c_mm <= 0) {
-        this.errorMsg = "C_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true;
     },
     isT_mmValid(){
         if(!this.t_mm){
-            return null
-        }
-        if (this.t_mm <= 0) {
-        this.errorMsg = "T_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
 
     },
     isA_mmValid(){
         if(!this.a_mm){
-            return null
-        }
-        if (this.a_mm <= 0) {
-        this.errorMsg = "A_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
 
     },
     isP_kg_mValid(){
         if(!this.p_kg_m){
-            return null
-        }
-        if (this.p_kg_m <= 0) {
-        this.errorMsg = "p_kg_m tem de ser um valor >0";
+            this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isYg_mmValid(){
         if(!this.yg_mm){
-            return null
-        }
-        if (this.yg_mm <= 0) {
-        this.errorMsg = "yg_mm tem de ser um valor >0";
+         this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isZg_mmValid(){
         if(!this.zg_mm){
-            return null
-        }
-        if (this.zg_mm <= 0) {
-        this.errorMsg = "zg_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isLy_mmValid(){
         if(!this.ly_mm){
-            return null
-        }
-        if (this.ly_mm <= 0) {
-        this.errorMsg = "ly_mm tem de ser um valor >0";
+            this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
 
     },
     isWy_mmValid(){
         if(!this.wy_mm){
-            return null
-        }
-        if (this.wy_mm <= 0) {
-        this.errorMsg = "wy_mm tem de ser um valor >0";
+           this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isLz_mmValid(){
         if(!this.lz_mm){
-            return null
-        }
-        if (this.lz_mm <= 0) {
-        this.errorMsg = "lz_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isWz_mmValid(){
         if(!this.wz_mm){
-            return null
-        }
-        if (this.wz_mm <= 0) {
-        this.errorMsg = "wz_mm tem de ser um valor >0";
+           this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+       
       this.errorMsg = "";
       return true
     },
     isYs_mmValid(){
         if(!this.ys_mm){
-            return null
-        }
-        if (this.ys_mm <= 0) {
-        this.errorMsg = "ys_mm tem de ser um valor >0";
+           this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isZs_mmValid(){
         if(!this.zs_mm){
-            return null
-        }
-        if (this.zs_mm <= 0) {
-        this.errorMsg = "zs_mm tem de ser um valor >0";
+           this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isLt_mmValid(){
         if(!this.lt_mm){
-            return null
-        }
-        if (this.lt_mm <= 0) {
-        this.errorMsg = "lt_mm tem de ser um valor >0";
+           this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
     isLw_mmValid(){
         if(!this.lw_mm){
-            return null
-        }
-        if (this.lw_mm <= 0) {
-        this.errorMsg = "lw_mm tem de ser um valor >0";
+          this.errorMsg = "introduza valor";
         return false;
-      }
+        }
+        
       this.errorMsg = "";
       return true
     },
@@ -509,8 +467,8 @@ export default {
     create() {
         this.$axios.$post("/api/variantes", {
             codigo:this.codigo,
-            nomeProduto: this.nomeProduto,
-            nome: this.name,
+            produtoNome: this.nomeProduto,
+            nome: this.nome,
             weff_p: this.weff_p,
             weff_n: this.weff_n,
             ar: this.ar,
@@ -537,6 +495,7 @@ export default {
         })
         .catch((error) => {
           this.errorMsg = error.response.data
+          
         })
     }
   }

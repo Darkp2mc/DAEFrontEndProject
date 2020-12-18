@@ -11,7 +11,7 @@
         <h4>Variantes</h4>
         <b-table v-if="variantes.length" striped over :items="variantes" :fields="variantesFields">
             <template v-slot:cell(actions)= "row">
-                <nuxt-link class="btn btn-success" :to="`/variantes/${row.item.nome}/update`">Atualizar</nuxt-link>
+                <nuxt-link class="btn btn-success" :to="`variantes/${row.item.codigo}/update`">Atualizar</nuxt-link>
                 <b-button variant="danger" v-on:click="deleteVariante(row.item.codigo)">Eliminar</b-button>
             </template>
         </b-table>
@@ -27,6 +27,7 @@
 export default {
     data() {
         return {
+            fabricanteUsername: this.$auth.user.sub,
             produto: {},
             variantesFields: [
                 'codigo',
@@ -48,7 +49,6 @@ export default {
                 'lz_mm',
                 'wz_mm',
                 'ys_mm',
-                'zc_mm',
                 'lt_mm',
                 'lw_mm',
                 'actions'                
@@ -72,7 +72,14 @@ export default {
     },
     methods: {
         deleteVariante(codigoVariante){
-
+            this.$axios.
+            $delete(`api/fabricantes/${this.fabricanteUsername}/produtos/${this.nome}/variantes/${codigoVariante}`)
+             .then(()=> {
+                window.location.reload()
+            })
+            .catch(errors=>
+                console.log(errors)
+            )
         }
     }
     
