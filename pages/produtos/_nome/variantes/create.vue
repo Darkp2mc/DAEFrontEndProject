@@ -517,7 +517,7 @@ export default {
             sigmaC: this.sigmaC,
             h_mm:this.h_mm,
             b_mm: this.b_mm,
-            c_mm: this.b_mm,
+            c_mm: this.c_mm,
             t_mm: this.t_mm,
             a_mm: this.a_mm,
             p_kg_m: this.p_kg_m,
