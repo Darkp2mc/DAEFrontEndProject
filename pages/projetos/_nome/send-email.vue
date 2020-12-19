@@ -11,8 +11,7 @@
         <textarea v-model="message" name="message"></textarea>
       </div>
       
-      <nuxt-link class="btn btn-primary" :to="`/projetos/${this.nome}`">
-        Voltar Atras
+      <nuxt-link class="btn btn-primary" :to="`/projetos/${this.nome}`">Voltar Atras
       </nuxt-link>
       &nbsp;
       <button class="btn btn-success" @click.prevent="send">Enviar</button>
@@ -47,7 +46,7 @@ export default {
         })
         .then((msg) => {
           this.$toast.success(msg).goAway(1500)
-          this.$router.push("/projetistas/"+this.projeto.projetistaUsername)
+          this.$router.push(`/projetos/${this.nome}`)
         })
         .catch((error) => {
           this.$toast.error("error sending the e-mail").goAway(3000);

@@ -13,7 +13,7 @@
             </template>
         </b-table>
         <p v-else>Sem Produtos</p>
-        <h4>Variantes em Utilização</h4>
+        <h4>Variantes em Utilização Em Estruturas</h4>
         <b-table v-if="variantes.length" striped over :items="variantes" :fields="varianteFields">
         </b-table>
         <p v-else>Sem Variantes em Uso</p>
@@ -53,7 +53,7 @@ export default {
         this.$axios
             .$get(`/api/fabricantes/${this.username}`)
                 .then((fabricante) => (this.fabricante = fabricante || {}))
-        this.$axios.$get(`/api/fabricantes/${this.username}/variantesEm`)
+        this.$axios.$get(`/api/fabricantes/${this.username}/variantesEmEstruturas`)
                 .then((variantes)=> (this.variantes = variantes || {}))
     },
     methods: {

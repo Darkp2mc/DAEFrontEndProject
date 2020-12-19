@@ -4,7 +4,7 @@
         <p>Nome: {{projeto.nome}}</p>
         <p v-if="this.$auth.user.groups.includes('Cliente')">Projetista: {{projeto.projetistaUsername}}</p>
         <p v-if="this.$auth.user.groups.includes('Projetista')">Cliente: {{projeto.clienteUsername}}</p>
-        <p>Comentarios: {{projeto.comentario}}</p>
+        <p>Comentario: {{projeto.comentario}}</p>
         <p v-if="projeto.estado==0">Em Desenvolvimento</p>
         <p v-if="projeto.estado==2">Terminado</p>
         <p v-if="projeto.estado==1">Aceite pelo Cliente</p>
@@ -16,7 +16,7 @@
                 <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
             </template>
         </b-table>
-        <b-table v-if="estruturas.length && this.$auth.user.groups.includes('Projetista')" striped over :items="estruturas" :fields="estruturasFields">
+        <b-table v-else-if="estruturas.length && this.$auth.user.groups.includes('Projetista')" striped over :items="estruturas" :fields="estruturasFields">
             <template v-slot:cell(actions)="row">
                 <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
                 <b-button variant="danger" v-on:click="deleteEstrutura(row.item.nome)">Eliminar</b-button>
@@ -99,9 +99,11 @@ export default {
                     .then((projeto)=> (this.projeto = projeto || {}))
         }else{
              this.$axios.$get(`/api/clientes/${this.$auth.user.sub}/projetos/${this.nome}`)
-            .then((projeto)=> (this.projeto = projeto || {}))
-        }
+            .then((projeto)=> (this.projeto = projeto || {}
+            ))
             
+        }
+           
   },
 
   methods: {
