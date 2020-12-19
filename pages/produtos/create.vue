@@ -3,32 +3,36 @@
     <h4>Criar novo Produto</h4>
     <form @submit.prevent="create" :disabled="!isFormValid">
       <b-input
-        v-model.trim="nome"
+        v-model="nome"
         :state="isNomeValid"
         required
         placeholder="Insira o nome do produto"
       />
       <b-form-select
-        v-model.trim="tipo"
+        v-model="tipo"
         :state="isTipoValid"
         :options="tipoOptions"
         required
       ></b-form-select>
       <b-form-select
-        v-model.trim="familia"
+        v-model="familia"
         :state="isFamiliaValid"
         :options="familiaOptions"
         required
       ></b-form-select>
       <b-input
-        v-model.trim="e"
+        v-model="e"
         :state="isEValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o E do produto"
       />
       <b-input
-        v-model.trim="N"
+        v-model="N"
         :state="isNValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o N do produto"
       />

@@ -3,7 +3,7 @@
     <h4>Criar uma Nova Estrutura</h4>
     <form @submit.prevent="create" :disabled="!isFormValid">
         <b-input
-            v-model.trim="nome"
+            v-model="nome"
             :state="isNomeValid"
             required
             placeholder="Insira o nome da estrutura"
@@ -15,14 +15,18 @@
             required>
         </b-form-select>
         <b-input
-        v-model.trim="numeroDeVaos"
+        v-model="numeroDeVaos"
         :state="isNumVaosValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o numero de vaos"
         />
         <b-input
-        v-model.trim="comprimentoDaVao"
+        v-model="comprimentoDaVao"
         :state="isCompValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o comprimento do vao"
         />
@@ -41,8 +45,10 @@
         placeholder="Insira altura da lage"
         />
         <b-input
-        v-model.trim="sobrecarga"
+        v-model="sobrecarga"
         :state="isSobrecargaValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira  sobrecarga da estrutura"
         />

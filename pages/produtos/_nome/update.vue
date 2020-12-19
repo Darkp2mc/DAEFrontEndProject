@@ -20,12 +20,16 @@
       <b-input
         v-model="e"
         :state="isEValid"
+        type="number"
+        step=".001"
         required
       />
       <p>Escolha o N do produto</p>
       <b-input
         v-model="n"
         :state="isNValid"
+        type="number"
+        step=".001"
         required
       />
       <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>

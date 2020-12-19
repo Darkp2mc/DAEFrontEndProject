@@ -3,134 +3,176 @@
     <h3>Criar Variante do produto {{ nomeProduto }}</h3>
     <b-form @submit.prevent="create" :disabled="!isFormValid">
       <b-input
-        v-model.trim="codigo"
+        v-model="codigo"
         :state="isCodigoValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o codigo da variante"
       />
       <b-input
-        v-model.trim="nome"
+        v-model="nome"
         :state="isNomeValid"
         required
         placeholder="Insira o nome da variante"
       />
       <b-input
-        v-model.trim="weff_p"
+        v-model="weff_p"
         :state="isWeff_pValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o weff_p do produto"
       />
       <b-input
-        v-model.trim="weff_n"
+        v-model="weff_n"
         :state="isWeff_nValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o weff_n do produto"
       />
       <b-input
-        v-model.trim="ar"
+        v-model="ar"
         :state="isArValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o ar do produto"
       />
       <b-input
-        v-model.trim="sigmaC"
+        v-model="sigmaC"
         :state="isSigmaCValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o sigmaC do produto"
       />
       <b-input
-        v-model.trim="h_mm"
+        v-model="h_mm"
         :state="isH_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o h_mm do produto"
       />
       <b-input
-        v-model.trim="b_mm"
+        v-model="b_mm"
         :state="isB_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o B_mm do produto"
       />
       <b-input
-        v-model.trim="c_mm"
+        v-model="c_mm"
         :state="isC_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o C_mm do produto"
       />
       <b-input
-        v-model.trim="t_mm"
+        v-model="t_mm"
         :state="isT_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o t_mm do produto"
       />
       <b-input
-        v-model.trim="a_mm"
+        v-model="a_mm"
         :state="isA_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o a_mm do produto"
       />
       <b-input
-        v-model.trim="p_kg_m"
+        v-model="p_kg_m"
         :state="isP_kg_mValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o p_kg_m do produto"
       />
       <b-input
-        v-model.trim="yg_mm"
+        v-model="yg_mm"
         :state="isYg_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o yg_mm do produto"
       />
       <b-input
-        v-model.trim="zg_mm"
+        v-model="zg_mm"
         :state="isZg_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o zg_mm do produto"
       />
       <b-input
-        v-model.trim="ly_mm"
+        v-model="ly_mm"
         :state="isLy_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o Ly_mm do produto"
       />
       <b-input
-        v-model.trim="wy_mm"
+        v-model="wy_mm"
         :state="isWy_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o Wy_mm do produto"
       />
       <b-input
-        v-model.trim="lz_mm"
+        v-model="lz_mm"
         :state="isLz_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o lz_mm do produto"
       />
       <b-input
-        v-model.trim="wz_mm"
+        v-model="wz_mm"
         :state="isWz_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o wz_mm do produto"
       />
       <b-input
-        v-model.trim="ys_mm"
+        v-model="ys_mm"
         :state="isYs_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o ys_mm do produto"
       />
       <b-input
-        v-model.trim="zs_mm"
+        v-model="zs_mm"
         :state="isZs_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o zs_mm do produto"
       />
       <b-input
-        v-model.trim="lt_mm"
+        v-model="lt_mm"
         :state="isLt_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o lt_mm do produto"
       />
       <b-input
-        v-model.trim="lw_mm"
+        v-model="lw_mm"
         :state="isLw_mmValid"
+        type="number"
+        step=".001"
         required
         placeholder="Insira o lw_mm do produto"
       />
