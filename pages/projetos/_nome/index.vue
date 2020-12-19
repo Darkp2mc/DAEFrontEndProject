@@ -11,7 +11,7 @@
         <p v-if="projeto.estado==-1">Recusado pelo Cliente</p>
 
         <h4>Estruturas</h4>
-        <b-table v-if="estruturas.length && this.$auth.user.groups.includes('Cliente')" striped over :items="estruturas" :fields="estruturasFields">
+        <b-table v-if="estruturas.length && this.$auth.user.groups.includes('Cliente') || projeto.estado==2" striped over :items="estruturas" :fields="estruturasFields">
             <template v-slot:cell(actions)="row">
                 <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
             </template>
@@ -35,15 +35,15 @@
 
         <b-button variant="warning" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetistas/${projeto.projetistaUsername}`">Voltar</b-button>
         <nuxt-link class="btn btn-success" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/send-email`">Enviar e-mail</nuxt-link>
-        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/update`">Atualizar Projeto</nuxt-link>
-        <nuxt-link class="btn btn-danger" v-if="this.$auth.user.groups.includes('Projetista')" :to="`/projetos/${projeto.nome}/estruturas/create`">Criar Estrutura </nuxt-link>
+        <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Projetista')&& projeto.estado!=2" :to="`/projetos/${projeto.nome}/update`">Atualizar Projeto</nuxt-link>
+        <nuxt-link class="btn btn-danger" v-if="this.$auth.user.groups.includes('Projetista')&& projeto.estado!=2" :to="`/projetos/${projeto.nome}/estruturas/create`">Criar Estrutura </nuxt-link>
         <b-button class="btn btn-info" v-if="this.$auth.user.groups.includes('Projetista') && projeto.estado!=2" v-on:click="terminar()">Terminar Projeto</b-button>
         <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Voltar</b-button>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Enviar Ficheiro</nuxt-link>
         <b-button variant="success" v-if="this.$auth.user.groups.includes('Cliente')  && projeto.estado!=2 && projeto.estado != 1" v-on:click="showFormsAcept()">Aceitar Projeto</b-button>
         <b-button variant="danger" v-if="this.$auth.user.groups.includes('Cliente')  && projeto.estado!=2 && projeto.estado != -1" v-on:click="showFormsDecline()">Rejeitar Projeto</b-button>
             <br>
-        <form v-if="showFormAcept" @submit.prevent="aceitarProjeto">    
+        <form v-if="showFormAcept" @submit.prevent="aceitarProjeto">
             <p>Comentario: </p>
             <input v-model="comentario" type="text"/>
             <br>
@@ -71,9 +71,9 @@ export default {
           'estado',
           'actions'
       ],
-      
+
       documentsFields: ['filename', 'actions'],
-      showFormAcept: false, 
+      showFormAcept: false,
       showFormDecline: false,
       comentario: ''
     }
@@ -82,7 +82,7 @@ export default {
   computed: {
       nome() {
           return this.$route.params.nome
-         
+
       },
       estruturas() {
           return this.projeto.estruturas || []
@@ -101,9 +101,9 @@ export default {
              this.$axios.$get(`/api/clientes/${this.$auth.user.sub}/projetos/${this.nome}`)
             .then((projeto)=> (this.projeto = projeto || {}
             ))
-            
+
         }
-           
+
   },
 
   methods: {
@@ -124,12 +124,12 @@ export default {
           this.$axios.$put(`api/projetos/${this.nome}/terminar`, {})
           .then( () => {
                   window.location.reload()
-                   
+
                 })
                 .catch(errors=>
                     console.log(errors)
                 )
-      }, 
+      },
       showFormsAcept(){
         this.showFormAcept = true
       },
@@ -163,7 +163,7 @@ export default {
           })
             .then( (msg) => {
                 this.$toast.success(msg).goAway(1500)
-               window.location.reload() 
+               window.location.reload()
                this.comentario = ''
                 this.showFormDecline = false
             })
