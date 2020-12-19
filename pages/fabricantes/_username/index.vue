@@ -13,6 +13,11 @@
             </template>
         </b-table>
         <p v-else>Sem Produtos</p>
+        <h4>Variantes em Utilização</h4>
+        <b-table v-if="variantes.length" striped over :items="variantes" :fields="varianteFields">
+        </b-table>
+        <p v-else>Sem Variantes em Uso</p>
+
 
         <nuxt-link class="btn btn-success"  :to="`/produtos/create`">Criar Produtos</nuxt-link>
     </b-container>
@@ -29,6 +34,11 @@ export default {
                 'tipo',
                 'Actions'
             ],
+            variantes: {},
+            varianteFields: [
+                'codigo',
+                'nome'
+            ]
         }
     },
     computed: {
@@ -43,6 +53,8 @@ export default {
         this.$axios
             .$get(`/api/fabricantes/${this.username}`)
                 .then((fabricante) => (this.fabricante = fabricante || {}))
+        this.$axios.$get(`/api/fabricantes/${this.username}/variantesEm`)
+                .then((variantes)=> (this.variantes = variantes || {}))
     },
     methods: {
         deleteProduto(nomeProduto){

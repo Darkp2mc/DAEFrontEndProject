@@ -11,9 +11,15 @@
         <p v-if="projeto.estado==-1">Recusado pelo Cliente</p>
 
         <h4>Estruturas</h4>
-        <b-table v-if="estruturas.length" striped over :items="estruturas" :fields="estruturasFields">
+        <b-table v-if="estruturas.length && this.$auth.user.groups.includes('Cliente')" striped over :items="estruturas" :fields="estruturasFields">
             <template v-slot:cell(actions)="row">
                 <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
+            </template>
+        </b-table>
+        <b-table v-if="estruturas.length && this.$auth.user.groups.includes('Projetista')" striped over :items="estruturas" :fields="estruturasFields">
+            <template v-slot:cell(actions)="row">
+                <nuxt-link class="btn btn-primary" :to="`/projetos/${projeto.nome}/estruturas/${row.item.nome}`" >Detalhes</nuxt-link>
+                <b-button variant="danger" v-on:click="deleteEstrutura(row.item.nome)">Eliminar</b-button>
             </template>
         </b-table>
         <p v-else> Sem Estruturas</p>
@@ -126,7 +132,7 @@ export default {
         this.showFormAcept = true
       },
       showFormsDecline(){
-          this.showFormAcept = true
+          this.showFormDecline = true
       },
       fechar(){
           this.showFormAcept = false
@@ -161,6 +167,15 @@ export default {
             })
             .catch(errors=>
                 this.$toast.error("error making comment").goAway(3000)
+            )
+      },
+      deleteEstrutura(nomeEstrutura){
+          this.$axios.$put(`api/projetos/${this.nome}/estrutura/${nomeEstrutura}/remover`)
+            .then(()=>{
+                window.location.reload()
+            })
+            .catch(errors=>
+            console.log(errors)
             )
 
       }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Send an E-mail to Cliente {{projeto.clienteUsername}}</h1>
+    <h1>Send an E-mail to  {{projeto.clienteUsername}}</h1>
     <form @submit.prevent="send">
       <div>
         subject:
@@ -11,11 +11,11 @@
         <textarea v-model="message" name="message"></textarea>
       </div>
       
-      <nuxt-link :to="`/projetistas/${projeto.projetistaUsername}`">
-        Go to Projetista Details
+      <nuxt-link class="btn btn-primary" :to="`/projetos/${this.nome}`">
+        Voltar Atras
       </nuxt-link>
       &nbsp;
-      <button @click.prevent="send">SEND</button>
+      <button class="btn btn-success" @click.prevent="send">Enviar</button>
     </form>
   </div>
 </template>

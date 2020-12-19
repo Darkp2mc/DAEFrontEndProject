@@ -3,14 +3,14 @@
     <h1>Update a Project</h1>
     <form @submit.prevent="update" :disabled="!isFormValid">
       <b-input
-        v-model.trim="clienteUsername"
+        v-model="clienteUsername"
         :state="isClienteValid"
         required
-        placeholder="Enter the Client UserName"
+        
       />
       <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
 
-      <nuxt-link :to="`/projetos/${nome}`">Return</nuxt-link>
+      <nuxt-link class="btn btn-primary" :to="`/projetos/${nome}`">Return</nuxt-link>
 
       <button type="reset" @click="reset">RESET</button>
 
@@ -24,7 +24,7 @@ export default {
   data() {
     return {
       projeto: {},
-      clienteUsername: null,
+      clienteUsername: this.projetistaUsername,
       projetistaUsername: this.$auth.user.sub,
       errorMsg: false,
     };
@@ -32,7 +32,7 @@ export default {
 
   created() {
     this.$axios.$get(`/api/projetos/${this.nome}`).then((projeto) => {
-      this.projeto = projeto;
+      this.clienteUsername = projeto.clienteUsername
     });
   },
   computed: {
