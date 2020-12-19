@@ -8,9 +8,9 @@
             required
             placeholder="Insira o nome da estrutura"
         />
-        <b-form-select 
+        <b-form-select
             v-model="tipoDeProduto"
-            :state="isTipoValid" 
+            :state="isTipoValid"
             :options="options"
             required>
         </b-form-select>
@@ -26,10 +26,10 @@
         required
         placeholder="Insira o comprimento do vao"
         />
-        <b-form-select 
+        <b-form-select
             v-if="tipoDeProduto!='Lage'"
             v-model="aplicacao"
-            :state="isAppValid" 
+            :state="isAppValid"
             :options="optionsApp"
             required>
         </b-form-select>
@@ -48,7 +48,7 @@
         />
 
         <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
-        
+
       <button type="reset" @click="reset">Reset</button>
       <button @click.prevent="create" :disabled="!isFormValid">Criar</button>
     </form>
@@ -87,7 +87,7 @@ export default {
       comprimentoDaVao: null,
       alturaDaLage: null,
       sobrecarga: null,
-      estado: null    
+      estado: null
     }
   },
   computed: {
@@ -107,7 +107,7 @@ export default {
       if(!this.tipoDeProduto){
         return null
       }
-      
+
       return true
     },
     isNumVaosValid(){
@@ -213,12 +213,11 @@ export default {
             comprimentoDaVao: this.comprimentoDaVao,
             aplicacao: this.aplicacao,
             alturaDaLage: this.alturaDaLage,
-            sobrecarga: this.sobrecarga,
-            estado: 0
+            sobrecarga: this.sobrecarga
         })
         .then(()=> {
          this.$router.push("/projetos/"+this.projetoNome);
-          
+
         })
         .catch((error) => {
           this.errorMsg = error.response.data;
