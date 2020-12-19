@@ -3,110 +3,127 @@
     <h3>Atualizar Variante  </h3>
     <b-form @submit.prevent="update" :disabled="!isFormValid">
       
+      <p>Insira o nome da Variante</p>
       <b-input
         v-model="nome"
         :state="isNomeValid"
         required
-       
       />
+      <p>Insira o Weff_p da Variante</p>
       <b-input
         v-model="weff_p"
         :state="isWeff_pValid"
-        required
-        
+        required  
       />
+      <p>Insira o Weff_n da Variante</p>
       <b-input
         v-model="weff_n"
         :state="isWeff_nValid"
         required
-        
       />
+      <p>Insira o Ar da Variante</p>
       <b-input
         v-model="ar"
         :state="isArValid"
         required
-       
       />
+      <p>Insira o sigmaC da Variante</p>
       <b-input
         v-model="sigmaC"
         :state="isSigmaCValid"
         required
       />
+      <p>Insira o H_mm da Variante</p>
       <b-input
         v-model="h_mm"
         :state="isH_mmValid"
         required
       />
+      <p>Insira o B_mm da Variante</p>
       <b-input
         v-model="b_mm"
         :state="isB_mmValid"
         required
       />
+      <p>Insira o C_mm da Variante</p>
       <b-input
         v-model="c_mm"
         :state="isC_mmValid"
         required
       />
+      <p>Insira o T_mm da Variante</p>
       <b-input
         v-model="t_mm"
         :state="isT_mmValid"
         required
       />
+      <p>Insira o A_mm da Variante</p>
       <b-input
         v-model="a_mm"
         :state="isA_mmValid"
         required
       />
+      <p>Insira o P_Kg_M da Variante</p>
       <b-input
         v-model="p_kg_m"
         :state="isP_kg_mValid"
         required
       />
+      <p>Insira o Yg_mm da Variante</p>
       <b-input
         v-model="yg_mm"
         :state="isYg_mmValid"
         required
       />
+      <p>Insira o Zg_mm da Variante</p>
       <b-input
         v-model="zg_mm"
         :state="isZg_mmValid"
         required
       />
+      <p>Insira o Ly_mm da Variante</p>
       <b-input
         v-model="ly_mm"
         :state="isLy_mmValid"
         required
       />
+      <p>Insira o Wy_mm da Variante</p>
       <b-input
         v-model="wy_mm"
         :state="isWy_mmValid"
         required
       />
+      <p>Insira o Lz_mm da Variante</p>
       <b-input
         v-model="lz_mm"
         :state="isLz_mmValid"
         required
       />
+      <p>Insira o Wz_mm da Variante</p>
       <b-input
         v-model="wz_mm"
         :state="isWz_mmValid"
         required
       />
+      <p>Insira o Ys_mm da Variante</p>
       <b-input
         v-model="ys_mm"
         :state="isYs_mmValid"
         required
       />
+      <p>Insira o Zs_mm da Variante</p>
       <b-input
         v-model="zs_mm"
         :state="isZs_mmValid"
         required
       />
+      <p>Insira o Lt_mm da Variante</p>
       <b-input
         v-model="lt_mm"
         :state="isLt_mmValid"
         required
       />
+      <p>Insira o Lw_mm da Variante</p>
       <b-input
         v-model="lw_mm"
         :state="isLw_mmValid"
@@ -126,7 +143,7 @@
 export default {
   data() {
     return {
-       fabricanteNome: this.$auth.user.sub,
+      fabricanteNome: this.$auth.user.sub,
       nomeProduto: this.nomeProduto,
       errorMsg: null,
       nome: this.nome,

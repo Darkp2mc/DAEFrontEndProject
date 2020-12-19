@@ -1,30 +1,32 @@
 <template>
   <b-container>
-    <h4>Atualizar o produto {{ produto.nome }}</h4>
+    <h4>Atualizar o produto {{ this.nome }}</h4>
     <form @submit.prevent="update" :disabled="!isFormValid">
+      <p>Escolha o Tipo do Produto</p>
       <b-form-select
-        v-model.trim="tipo"
+        v-model="tipo"
         :state="isTipoValid"
         :options="tipoOptions"
         required
       ></b-form-select>
+      <p>Escolha a Familia do Produto</p>
       <b-form-select
-        v-model.trim="familia"
+        v-model="familia"
         :state="isFamiliaValid"
         :options="familiaOptions"
         required
       ></b-form-select>
+      <p>Escolha o E do produto</p>
       <b-input
-        v-model.trim="e"
+        v-model="e"
         :state="isEValid"
         required
-        placeholder="Insira o E do produto"
       />
+      <p>Escolha o N do produto</p>
       <b-input
-        v-model.trim="N"
+        v-model="n"
         :state="isNValid"
         required
-        placeholder="Insira o N do produto"
       />
       <p class="text-danger" v-show="errorMsg">{{ errorMsg }}</p>
       <button type="reset" @click="reset">Reset</button>
@@ -39,32 +41,33 @@
 export default {
   data() {
     return {
-      produto: {},
       fabricanteNome: this.$auth.user.sub,
       errorMsg: false,
-      tipo: null,
+      tipo: this.tipo,
       tipoOptions: [
-        { value: null, text: "Escolha o tipo de Produto" },
         { value: "Chapa", text: "Chapa" },
         { value: "Laje", text: "Laje" },
         { value: "Painel", text: "Painel" },
         { value: "Perfil", text: "Perfil" },
       ],
-      familia: null,
+      familia: this.familia,
       familiaOptions: [
-        { value: null, text: "Escolha a Familia" },
         { value: "C", text: "C" },
         { value: "Z", text: "Z" },
         { value: "Omega", text: "Omega" },
         { value: "Outro", text: "Outro" },
       ],
-      e: "",
-      N: "",
+      e: this.e,
+      n: this.n,
     };
   },
   created() {
     this.$axios.$get(`/api/produtos/${this.nome}`)
-            .then((produto)=> (this.produto = produto || {}))
+            .then((produto)=> (this.tipo = produto.tipo,
+                              this.familia=produto.familia,
+                              this.e= produto.e,
+                              this.n=produto.n
+             ))
   },
   computed: {
     nome() {
@@ -98,11 +101,11 @@ export default {
       return true;
     },
     isNValid() {
-      if (!this.N) {
+      if (!this.n) {
         return null;
       }
 
-      if (this.N <= 0) {
+      if (this.n <= 0) {
         this.errorMsg = "Insira um valor >0";
         return false;
       }
@@ -142,7 +145,7 @@ export default {
           tipo: this.tipo,
           familia: this.familia,
           e: this.e,
-          n: this.N,
+          n: this.n,
           fabricanteUsername: this.fabricanteNome,
         })
         .then(() => {

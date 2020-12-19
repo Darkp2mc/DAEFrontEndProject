@@ -2,17 +2,7 @@
     <div>
         <h1>Make a comment About {{nome}}</h1>
 
-        <form @submit.prevent="send">
-            <div>
-                comentario:
-                <input v-model="comentario" type="text"/>
-            </div>
-            <div>
-                <nuxt-link class="btn btn-primary" :to="`/clientes/${projeto.clienteUsername}/projetos/${this.nome}`">Back</nuxt-link>
-                <button class="btn btn-success" @click.prevent="send">SEND</button>
-            </div>
-            
-        </form>
+       
     </div>
 </template>
 

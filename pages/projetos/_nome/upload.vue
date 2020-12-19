@@ -8,9 +8,8 @@
       drop-placeholder="Drop file here..."
     ></b-form-file>
     <div class="mt 3">Selected file: {{ file ? file.name : "" }}</div>
-    <nuxt-link class="btn btn-link" :to="`/projetos/${$route.params.nome}`"
-      >Back</nuxt-link
-    >
+    <br>
+    <nuxt-link class="btn btn-primary" :to="`/projetos/${$route.params.nome}`">Back</nuxt-link>
     <b-button type="submit" :disabled="!hasFile">Upload</b-button>
   </form>
 </template>

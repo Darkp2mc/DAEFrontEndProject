@@ -29,7 +29,6 @@
         <b-table v-if="showVariante" striped over :items="variantesAAdicionar" :fields="variantesAAdicionarFields">
             <template v-slot:cell(actions)="row">
                 <b-button variant="primary" @click.prevent="adicionarVariante(row.item)">Adicionar</b-button>
-                
             </template>
         </b-table>
     </b-container>

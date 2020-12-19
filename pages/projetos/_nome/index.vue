@@ -34,7 +34,23 @@
         <b-button class="btn btn-info" v-if="this.$auth.user.groups.includes('Projetista') && projeto.estado!=2" v-on:click="terminar()">Terminar Projeto</b-button>
         <b-button variant="warning" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/clientes/${projeto.clienteUsername}`">Voltar</b-button>
         <nuxt-link class="btn btn-primary" v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/upload`">Enviar Ficheiro</nuxt-link>
-        <nuxt-link class="btn btn-success"  v-if="this.$auth.user.groups.includes('Cliente')" :to="`/projetos/${projeto.nome}/comentario`">Fazer Comentario</nuxt-link>  
+        <b-button variant="success" v-if="this.$auth.user.groups.includes('Cliente')  && projeto.estado!=2 && projeto.estado != 1" v-on:click="showFormsAcept()">Aceitar Projeto</b-button>
+        <b-button variant="danger" v-if="this.$auth.user.groups.includes('Cliente')  && projeto.estado!=2 && projeto.estado != -1" v-on:click="showFormsDecline()">Rejeitar Projeto</b-button>
+            <br>
+        <form v-if="showFormAcept" @submit.prevent="aceitarProjeto">    
+            <p>Comentario: </p>
+            <input v-model="comentario" type="text"/>
+            <br>
+            <button class="btn btn-primary" v-on:click="fechar()" >Cancelar</button>
+            <button class="btn btn-success"  @click.prevent="aceitarProjeto" >Send</button>
+        </form>
+        <form v-if="showFormDecline" @submit.prevent="rejeitarProjeto">
+            <p>Comentario: </p>
+            <input v-model="comentario" type="text"/>
+            <br>
+            <button class="btn btn-primary" v-on:click="fechar()" >Cancelar</button>
+            <button class="btn btn-danger" @click.prevent="rejeitarProjeto" >Send</button>
+        </form>
     </b-container>
 </template>
 
@@ -50,7 +66,10 @@ export default {
           'actions'
       ],
       
-      documentsFields: ['filename', 'actions']
+      documentsFields: ['filename', 'actions'],
+      showFormAcept: false, 
+      showFormDecline: false,
+      comentario: ''
     }
   },
 
@@ -94,14 +113,56 @@ export default {
                 })
       },
       terminar(){
-          this.$axios.$put(`api/projetos/${this.nome}/terminar`)
+          this.$axios.$put(`api/projetos/${this.nome}/terminar`, {})
           .then( () => {
-                   this.$router.push("/projetos/"+this.nome);
+                  window.location.reload()
                    
                 })
                 .catch(errors=>
                     console.log(errors)
                 )
+      }, 
+      showFormsAcept(){
+        this.showFormAcept = true
+      },
+      showFormsDecline(){
+          this.showFormAcept = true
+      },
+      fechar(){
+          this.showFormAcept = false
+          this.showFormDecline = false
+          this.comentario = ''
+      },
+      aceitarProjeto() {
+          this.$axios.$put(`api/projetos/${this.nome}/aceitar`, {
+              nome: this.nome,
+              comentario: this.comentario
+          })
+            .then( (msg) => {
+                this.$toast.success(msg).goAway(1500)
+                window.location.reload()
+                this.comentario = ''
+                this.showFormAcept = false
+            })
+            .catch(errors=>
+                this.$toast.error("error making comment").goAway(3000)
+            )
+      },
+      rejeitarProjeto(){
+          this.$axios.$put(`api/projetos/${this.nome}/rejeitar`, {
+              nome: this.nome,
+              comentario: this.comentario
+          })
+            .then( (msg) => {
+                this.$toast.success(msg).goAway(1500)
+               window.location.reload() 
+               this.comentario = ''
+                this.showFormDecline = false
+            })
+            .catch(errors=>
+                this.$toast.error("error making comment").goAway(3000)
+            )
+
       }
 
   }
